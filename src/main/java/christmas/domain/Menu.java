@@ -5,19 +5,24 @@ import christmas.utils.Menus;
 public class Menu {
     private final int AMOUNT_RANGE_MIN = 1;
     private final int AMOUNT_RANGE_MAX = 20;
-    private final String menu;
+    private final String name;
     private final int amount;
 
-    public Menu(String menu, String amountString) {
+    public Menu(String name, String amountString) {
         int amount = parseInt(amountString);
-        validate(menu, amount);
+        validate(name, amount);
 
-        this.menu = menu;
+        this.name = name;
         this.amount = amount;
     }
 
-    public String getMenu() {
-        String string = this.menu;
+    public String getName() {
+        String string = this.name;
+        return string;
+    }
+
+    public String getCategory() {
+        String string = Menus.getCategory(name);
         return string;
     }
 
@@ -26,14 +31,15 @@ public class Menu {
         return value;
     }
 
-    private void validate(String menu, int amount) {
-        validateMenu(menu);
+
+    private void validate(String name, int amount) {
+        validateMenu(name);
         validateAmount(amount);
     }
 
-    private void validateMenu(String menu) {
+    private void validateMenu(String name) {
         try {
-            Menus.valueOf(menu);
+            Menus.valueOf(name);
         } catch (Exception e) {
             throw new IllegalArgumentException();
         }

@@ -23,8 +23,9 @@ public enum Menus {
     }
 
 
-    public String getCategory() {
-        return category;
+    public static String getCategory(String name) {
+        Menus menu = Menus.valueOf(name);
+        return menu.category;
     }
 
     public int getPrice() {
