@@ -2,7 +2,6 @@ package christmas.model;
 
 import christmas.domain.Date;
 import christmas.domain.Menu;
-import christmas.service.MenuManager;
 import java.util.ArrayList;
 import java.util.List;
 

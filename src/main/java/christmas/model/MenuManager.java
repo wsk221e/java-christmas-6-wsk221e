@@ -1,4 +1,4 @@
-package christmas.service;
+package christmas.model;
 
 import christmas.domain.Menu;
 import java.util.ArrayList;
