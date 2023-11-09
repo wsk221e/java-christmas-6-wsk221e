@@ -2,10 +2,13 @@ package christmas.model;
 
 import christmas.domain.Date;
 import christmas.domain.Menu;
+import christmas.service.MenuManager;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Processor {
+    private MenuManager menu;
+
     public void processDate(String string) {
         Date date = new Date(string);
     }
@@ -22,6 +25,7 @@ public class Processor {
             List<String> menu = List.of(menuAndAmount.split("-"));
             menus.add(new Menu(menu.get(0), menu.get(1)));
         }
+        menu = new MenuManager(menus);
     }
 
 }
