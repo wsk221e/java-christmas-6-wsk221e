@@ -10,4 +10,10 @@ public class DisplayError extends ParentView {
         print();
     }
 
+    public void displayMenuError() {
+        initializeCache();
+        addToCache(Templates.ERROR_MENU_MESSAEGE);
+        print();
+    }
+
 }

@@ -30,7 +30,16 @@ public class Controller {
     }
 
     private void getUserReserveMenu() {
-        input.getUserReserveMenu();
+        while (true) {
+            try {
+                String menu = input.getUserReserveMenu();
+                processor.processMenu(menu);
+                break;
+            } catch (Exception e) {
+                error.displayMenuError();
+            }
+        }
+
     }
 
 }
