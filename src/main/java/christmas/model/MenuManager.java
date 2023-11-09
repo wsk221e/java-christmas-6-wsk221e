@@ -15,6 +15,29 @@ public class MenuManager {
         this.menus = menus;
     }
 
+    public int getMiddlePrice(Boolean weekendDiscount) {
+        int sum = 0;
+        sum += calculateEachPrice();
+        sum -= calculateEachDiscount(weekendDiscount);
+        return sum;
+    }
+
+    private int calculateEachPrice() {
+        int sum = 0;
+        for (Menu menu : menus) {
+            int price = menu.getPrice();
+            sum += price;
+        }
+        return sum;
+    }
+
+    private int calculateEachDiscount(Boolean weekendDiscount) {
+        int middleDiscount = 0;
+        for (Menu menu : menus) {
+            middleDiscount += menu.getDiscount(weekendDiscount);
+        }
+        return middleDiscount;
+    }
 
     public List<String> getMenuNames() {
         List<String> names = new ArrayList<>();

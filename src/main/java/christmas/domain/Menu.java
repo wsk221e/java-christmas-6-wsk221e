@@ -5,6 +5,7 @@ import christmas.utils.Menus;
 public class Menu {
     private final int AMOUNT_RANGE_MIN = 1;
     private final int AMOUNT_RANGE_MAX = 20;
+    private final int DISCOUNT_WEEKEND = 2023;
     private final String name;
     private final int amount;
 
@@ -14,6 +15,27 @@ public class Menu {
 
         this.name = name;
         this.amount = amount;
+    }
+
+
+    public int getPrice() {
+        return Menus.getPriceByName(name);
+    }
+
+    public int getDiscount(Boolean weekendDiscount) {
+        if (weekendDiscount) {
+            if (getCategory().equals("디저트")) {
+                return DISCOUNT_WEEKEND;
+            }
+            return 0;
+        }
+        if (!weekendDiscount) {
+            if (getCategory().equals("메인")) {
+                return DISCOUNT_WEEKEND;
+            }
+            return 0;
+        }
+        return 0;
     }
 
     public String getName() {

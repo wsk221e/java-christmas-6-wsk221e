@@ -13,7 +13,7 @@ public class Controller {
     public void start() {
         getUserReserveDate();
         getUserReserveMenu();
-
+        setServices();
     }
 
 
@@ -40,6 +40,10 @@ public class Controller {
             }
         }
 
+    }
+
+    private void setServices() {
+        processor.generateTotalPricer();
     }
 
 }

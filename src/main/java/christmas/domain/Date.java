@@ -1,10 +1,11 @@
 package christmas.domain;
 
+import java.util.List;
+
 public class Date {
     private final int DATE_RANGE_MIN = 1;
     private final int DATE_RANGE_MAX = 31;
     private final int date;
-
 
     public Date(String string) {
         int date = parseInt(string);
@@ -12,11 +13,13 @@ public class Date {
         this.date = date;
     }
 
-    public int getValue() {
-        int value = date;
-        return date;
-    }
 
+    public Boolean isIncluded(List<Integer> dateList) {
+        if (dateList.contains(date)) {
+            return true;
+        }
+        return false;
+    }
 
     private int parseInt(String string) {
         int date;
