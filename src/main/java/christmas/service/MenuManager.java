@@ -65,11 +65,11 @@ public class MenuManager {
         int total = 0;
         int drinks = 0;
         for (Menu menu : menus) {
-            if (menu.getCategory() == "음료") {
+            if ("음료".equals(menu.getCategory())) {
                 total++;
                 drinks++;
             }
-            if (menu.getCategory() != "음료") {
+            if (!"음료".equals(menu.getCategory())) {
                 total++;
             }
         }
