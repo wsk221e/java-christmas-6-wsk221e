@@ -23,6 +23,9 @@ public class Processor {
         List<String> menuAndAmountList = List.of(string.split(","));
         for (String menuAndAmount : menuAndAmountList) {
             List<String> menu = List.of(menuAndAmount.split("-"));
+            if (!(menu.size() == 2)) {
+                throw new IllegalArgumentException();
+            }
             menus.add(new Menu(menu.get(0), menu.get(1)));
         }
         menu = new MenuManager(menus);
