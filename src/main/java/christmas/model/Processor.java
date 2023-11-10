@@ -2,14 +2,17 @@ package christmas.model;
 
 import christmas.domain.Date;
 import christmas.domain.Menu;
-import christmas.service.TotalPricer;
+import christmas.service.Planner;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Processor {
+    private static final int INDEXOF_MENU = 0;
+    private static final int INDEXOF_AMOUNT = 1;
     private DateManager dateManager;
     private MenuManager menuManager;
-    private TotalPricer totalPricer;
+    private Planner planner;
+
 
     public void processDate(String string) {
         Date date = new Date(string);
@@ -21,22 +24,28 @@ public class Processor {
         menuManager = new MenuManager(menus);
     }
 
-    public void generateTotalPricer() {
-        totalPricer = new TotalPricer(dateManager, menuManager);
+    public void generatePlanner() {
+        planner = new Planner(dateManager, menuManager);
     }
-    
+
+
     private List<Menu> generateMenus(String string) {
         List<Menu> menus = new ArrayList<>();
 
         List<String> menuAndAmountList = List.of(string.split(","));
         for (String menuAndAmount : menuAndAmountList) {
             List<String> menu = List.of(menuAndAmount.split("-"));
-            if (!(menu.size() == 2)) {
-                throw new IllegalArgumentException();
-            }
-            menus.add(new Menu(menu.get(0), menu.get(1)));
+            validateLength(menu);
+
+            menus.add(new Menu(menu.get(INDEXOF_MENU), menu.get(INDEXOF_AMOUNT)));
         }
         return menus;
+    }
+
+    private void validateLength(List<String> menu) {
+        if (!(menu.size() == 2)) {
+            throw new IllegalArgumentException();
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.utils.Parser;
 import java.util.List;
 
 public class Date {
@@ -8,7 +9,7 @@ public class Date {
     private final int date;
 
     public Date(String string) {
-        int date = parseInt(string);
+        int date = Parser.parseInt(string);
         validate(date);
         this.date = date;
     }
@@ -19,16 +20,6 @@ public class Date {
             return true;
         }
         return false;
-    }
-
-    private int parseInt(String string) {
-        int date;
-        try {
-            date = Integer.parseInt(string);
-        } catch (Exception e) {
-            throw new IllegalArgumentException();
-        }
-        return date;
     }
 
     private void validate(int date) {

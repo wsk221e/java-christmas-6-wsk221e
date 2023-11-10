@@ -43,7 +43,7 @@ public class Controller {
     }
 
     private void setServices() {
-        processor.generateTotalPricer();
+        processor.generatePlanner();
     }
 
 }

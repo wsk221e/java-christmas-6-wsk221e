@@ -23,7 +23,7 @@ public enum Menus {
     }
 
 
-    public static String getCategory(String name) {
+    public static String getCategoryByName(String name) {
         Menus menu = Menus.valueOf(name);
         return menu.category;
     }
