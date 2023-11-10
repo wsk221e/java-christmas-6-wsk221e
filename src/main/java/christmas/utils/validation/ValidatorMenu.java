@@ -1,14 +1,17 @@
 package christmas.utils.validation;
 
+import static christmas.utils.constants.Strings.MENU_ONLY_FORBIDDEN;
+
 import christmas.domain.Menu;
 import christmas.domain.Menus;
+import christmas.utils.constants.Integers;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class ValidatorMenu {
-    private static final int AMOUNT_RANGE_MIN = 1;
-    private static final int AMOUNT_RANGE_MAX = 20;
+    private static final int AMOUNT_RANGE_MIN = Integers.AMOUNT_RANGE_MIN.getValue();
+    private static final int AMOUNT_RANGE_MAX = Integers.AMOUNT_RANGE_MAX.getValue();
 
 
     public static void validateMenu(String name, int amount) {
@@ -60,17 +63,17 @@ public class ValidatorMenu {
 
     private static void validateMenusOnlyDrinks(List<Menu> menus) {
         int total = 0;
-        int drinks = 0;
+        int forbidden = 0;
         for (Menu menu : menus) {
-            if (menu.isCategory("음료")) {
+            if (menu.isCategory(MENU_ONLY_FORBIDDEN.getName())) {
                 total++;
-                drinks++;
+                forbidden++;
             }
-            if (!menu.isCategory("음료")) {
+            if (!menu.isCategory(MENU_ONLY_FORBIDDEN.getName())) {
                 total++;
             }
         }
-        if (total == drinks) {
+        if (total == forbidden) {
             throw new IllegalStateException();
         }
     }

@@ -3,12 +3,14 @@ package christmas.model;
 import christmas.domain.Date;
 import christmas.domain.Menu;
 import christmas.service.Planner;
+import christmas.utils.constants.Integers;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Processor {
-    private static final int INDEXOF_MENU = 0;
-    private static final int INDEXOF_AMOUNT = 1;
+    private static final int INDEXOF_MENU = Integers.INDEXOF_MENU.getValue();
+    private static final int INDEXOF_AMOUNT = Integers.INDEXOF_AMOUNT.getValue();
+    private static final int MENU_SPLIT_SIZE = Integers.MENU_SPLIT_SIZE.getValue();
     private DateManager dateManager;
     private MenuManager menuManager;
     private Planner planner;
@@ -24,8 +26,9 @@ public class Processor {
         menuManager = new MenuManager(menus);
     }
 
-    public void generatePlanner() {
+    public Planner generatePlanner() {
         planner = new Planner(dateManager, menuManager);
+        return planner;
     }
 
 
@@ -43,7 +46,7 @@ public class Processor {
     }
 
     private void validateLength(List<String> menu) {
-        if (!(menu.size() == 2)) {
+        if (!(menu.size() == MENU_SPLIT_SIZE)) {
             throw new IllegalArgumentException();
         }
     }

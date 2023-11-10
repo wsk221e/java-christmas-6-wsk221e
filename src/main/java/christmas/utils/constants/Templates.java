@@ -1,4 +1,4 @@
-package christmas.utils;
+package christmas.utils.constants;
 
 public enum Templates {
     // Values, Fields, Constructor

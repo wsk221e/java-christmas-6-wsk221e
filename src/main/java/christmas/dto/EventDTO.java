@@ -1,10 +1,11 @@
 package christmas.dto;
 
+import static christmas.utils.constants.Integers.CHAMPAGNE_PRICE;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventDTO {
-    private final int CHAMPAGNE_PRICE = 25_000;
     private final int total, dDay, menu, star;
     private final boolean champagne;
 
@@ -27,7 +28,7 @@ public class EventDTO {
     private int calculateTotal() {
         int total = dDay + menu + star;
         if (champagne) {
-            total += CHAMPAGNE_PRICE;
+            total += CHAMPAGNE_PRICE.getValue();
         }
         return total;
     }

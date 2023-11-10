@@ -8,13 +8,9 @@ import christmas.model.MenuManager;
 import java.util.List;
 
 public class Planner {
-    private final DateManager date;
-    private final MenuManager menu;
     private final PriceManager priceManager;
 
     public Planner(DateManager date, MenuManager menu) {
-        this.date = date;
-        this.menu = menu;
         this.priceManager = new PriceManager(date, menu);
     }
 

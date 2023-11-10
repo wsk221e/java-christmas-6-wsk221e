@@ -5,9 +5,10 @@ import christmas.domain.Price;
 import christmas.dto.EventDTO;
 import christmas.model.DateManager;
 import christmas.model.MenuManager;
+import christmas.utils.constants.Integers;
 
 public class PriceManager {
-    private final int DISCOUNT_STARDAY = 1000;
+    private final int DISCOUNT_STARDAY = Integers.DISCOUNT_STARDAY.getValue();
     private final DateManager date;
     private final MenuManager menu;
     private final Event event;

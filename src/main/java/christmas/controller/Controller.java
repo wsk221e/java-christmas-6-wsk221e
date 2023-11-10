@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.model.Processor;
+import christmas.service.Planner;
 import christmas.view.DisplayError;
 import christmas.view.InputView;
 
@@ -8,6 +9,7 @@ public class Controller {
     private final InputView input = new InputView();
     private final Processor processor = new Processor();
     private final DisplayError error = new DisplayError();
+    private Planner planner;
 
 
     public void start() {
@@ -43,7 +45,7 @@ public class Controller {
     }
 
     private void setServices() {
-        processor.generatePlanner();
+        planner = processor.generatePlanner();
     }
 
 }

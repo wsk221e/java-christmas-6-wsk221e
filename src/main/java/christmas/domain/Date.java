@@ -1,12 +1,13 @@
 package christmas.domain;
 
+import static christmas.utils.constants.Integers.DATE_RANGE_MAX;
+import static christmas.utils.constants.Integers.DATE_RANGE_MIN;
+import static christmas.utils.constants.Integers.D_DAY;
+
 import christmas.utils.Parser;
 import java.util.List;
 
 public class Date {
-    private final int DATE_RANGE_MIN = 1;
-    private final int DATE_RANGE_MAX = 31;
-    private final int D_DAY = 25;
     private final int date;
 
     public Date(String string) {
@@ -24,11 +25,11 @@ public class Date {
     }
 
     public int getDDay() {
-        return D_DAY - date;
+        return D_DAY.getValue() - date;
     }
 
     private void validate(int date) {
-        if (date < DATE_RANGE_MIN || date > DATE_RANGE_MAX) {
+        if (date < DATE_RANGE_MIN.getValue() || date > DATE_RANGE_MAX.getValue()) {
             throw new IllegalArgumentException();
         }
     }

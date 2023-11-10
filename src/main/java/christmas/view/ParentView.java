@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.utils.Templates;
+import christmas.utils.constants.Templates;
 
 class ParentView {
     // Fields

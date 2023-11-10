@@ -3,10 +3,11 @@ package christmas.model;
 import static christmas.utils.validation.ValidatorMenu.validateMenus;
 
 import christmas.domain.Menu;
+import christmas.utils.constants.Integers;
 import java.util.List;
 
 public class MenuManager {
-    private final int DISCOUNT_WEEKEND = 2023;
+    private final int DISCOUNT_WEEKEND = Integers.DISCOUNT_WEEKEND.getValue();
     private final List<Menu> menus;
 
     public MenuManager(List<Menu> menus) {

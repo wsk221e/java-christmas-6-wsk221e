@@ -1,7 +1,7 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.utils.Templates;
+import christmas.utils.constants.Templates;
 
 public class InputView extends ParentView {
     // Features
