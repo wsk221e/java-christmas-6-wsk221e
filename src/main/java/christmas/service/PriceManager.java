@@ -1,6 +1,7 @@
 package christmas.service;
 
 import christmas.domain.Event;
+import christmas.dto.EventDTO;
 import christmas.model.DateManager;
 import christmas.model.MenuManager;
 
@@ -35,6 +36,10 @@ public class PriceManager {
 
     public int calculateDDayDiscount() {
         return date.getDDayDiscount();
+    }
+
+    public EventDTO getEventInformation() {
+        return event.toDTO();
     }
 
 }

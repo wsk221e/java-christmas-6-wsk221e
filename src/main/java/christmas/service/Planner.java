@@ -1,7 +1,10 @@
 package christmas.service;
 
+import christmas.dto.EventDTO;
 import christmas.model.DateManager;
 import christmas.model.MenuManager;
+import christmas.utils.Badges;
+import java.util.List;
 
 public class Planner {
     private final DateManager date;
@@ -21,8 +24,17 @@ public class Planner {
         total -= price.calculateDDayDiscount();
     }
 
-    public void calculateTotalEvents() {
+    public String getEventBadge() {
+        int benefit = calculateTotalBenefit();
+        String badge = Badges.getBadgeByBenefit(benefit);
+        return badge;
+    }
 
+    private int calculateTotalBenefit() {
+        EventDTO event = price.getEventInformation();
+        List<Integer> benefits = event.getDiscountInfo();
+        int totalBenefits = benefits.get(0);
+        return totalBenefits;
     }
 
 }
