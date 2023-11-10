@@ -4,37 +4,25 @@ import christmas.model.DateManager;
 import christmas.model.MenuManager;
 
 public class Planner {
-    private final int DISCOUNT_STAR = 1000;
     private final DateManager date;
     private final MenuManager menu;
+    private final PriceManager price;
 
     public Planner(DateManager date, MenuManager menu) {
         this.date = date;
         this.menu = menu;
+        this.price = new PriceManager(date, menu);
     }
 
     public void calculateTotalPrice() {
-        int total = calculateMenuPrice();
-        total -= calculateMenuDiscounts();
-        total -= calculateStarDayDiscount();
+        int total = price.calculateMenuPrice();
+        total -= price.calculateMenuDiscounts();
+        total -= price.calculateStarDayDiscount();
+        total -= price.calculateDDayDiscount();
     }
 
+    public void calculateTotalEvents() {
 
-    private int calculateMenuPrice() {
-        return menu.getMenusPrice();
-    }
-
-    private int calculateMenuDiscounts() {
-        String weekendDiscount = date.getWeekendDiscount();
-        int menuDiscount = menu.getMenusDiscount(weekendDiscount);
-        return menuDiscount;
-    }
-
-    private int calculateStarDayDiscount() {
-        if (date.isStared()) {
-            return DISCOUNT_STAR;
-        }
-        return 0;
     }
 
 }
