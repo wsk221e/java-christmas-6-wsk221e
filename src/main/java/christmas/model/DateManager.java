@@ -8,6 +8,9 @@ public class DateManager {
     private final List<Integer> staredDate = List.of(3, 10, 17, 24, 25, 31);
     private final String weekendDiscount = "메인";
     private final String weekdayDiscount = "디저트";
+    private final int DISCOUNT_DDAY_MAX = 3400;
+    private final int DISCOUNT_DDAY_MULTIPLIER = 100;
+
     private final Date date;
 
 
@@ -26,6 +29,15 @@ public class DateManager {
     public Boolean isStared() {
         Boolean isStared = date.isIncluded(staredDate);
         return isStared;
+    }
+
+    public int getDDayDiscount() {
+        int discount = 0;
+        int dDay = date.getDDay();
+        if (dDay >= 0) {
+            discount = DISCOUNT_DDAY_MAX - DISCOUNT_DDAY_MULTIPLIER * dDay;
+        }
+        return discount;
     }
 
 }

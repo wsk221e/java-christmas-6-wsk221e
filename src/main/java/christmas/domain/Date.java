@@ -6,6 +6,7 @@ import java.util.List;
 public class Date {
     private final int DATE_RANGE_MIN = 1;
     private final int DATE_RANGE_MAX = 31;
+    private final int D_DAY = 25;
     private final int date;
 
     public Date(String string) {
@@ -20,6 +21,10 @@ public class Date {
             return true;
         }
         return false;
+    }
+
+    public int getDDay() {
+        return D_DAY - date;
     }
 
     private void validate(int date) {
