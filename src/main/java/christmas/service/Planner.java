@@ -1,10 +1,10 @@
 package christmas.service;
 
+import christmas.domain.Badges;
 import christmas.domain.Price;
 import christmas.dto.EventDTO;
 import christmas.model.DateManager;
 import christmas.model.MenuManager;
-import christmas.utils.Badges;
 import java.util.List;
 
 public class Planner {

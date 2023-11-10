@@ -2,7 +2,6 @@ package christmas.domain;
 
 import static christmas.utils.validation.ValidatorMenu.validateMenu;
 
-import christmas.utils.Menus;
 import christmas.utils.Parser;
 
 public class Menu {

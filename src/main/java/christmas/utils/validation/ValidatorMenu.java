@@ -1,7 +1,7 @@
 package christmas.utils.validation;
 
 import christmas.domain.Menu;
-import christmas.utils.Menus;
+import christmas.domain.Menus;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
