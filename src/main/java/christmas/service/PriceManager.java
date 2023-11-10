@@ -1,6 +1,7 @@
 package christmas.service;
 
 import christmas.domain.Event;
+import christmas.domain.Price;
 import christmas.dto.EventDTO;
 import christmas.model.DateManager;
 import christmas.model.MenuManager;
@@ -17,29 +18,42 @@ public class PriceManager {
         this.event = new Event();
     }
 
-    public int calculateMenuPrice() {
-        return menu.getMenusPrice();
-    }
-
-    public int calculateMenuDiscounts() {
-        String weekendDiscount = date.getWeekendDiscount();
-        int menuDiscount = menu.getMenusDiscount(weekendDiscount);
-        return menuDiscount;
-    }
-
-    public int calculateStarDayDiscount() {
-        if (date.isStared()) {
-            return DISCOUNT_STARDAY;
-        }
-        return 0;
-    }
-
-    public int calculateDDayDiscount() {
-        return date.getDDayDiscount();
+    public Price calculateTotalPrice() {
+        int total = calculateMenuPrice();
+        total -= calculateMenuDiscounts();
+        total -= calculateStarDayDiscount();
+        total -= calculateDDayDiscount();
+        Price price = new Price(total);
+        return price;
     }
 
     public EventDTO getEventInformation() {
         return event.toDTO();
+    }
+
+
+    private int calculateMenuPrice() {
+        return menu.getMenusPrice();
+    }
+
+    private int calculateMenuDiscounts() {
+        String weekendDiscount = date.getWeekendDiscount();
+        int menuDiscount = menu.getMenusDiscount(weekendDiscount);
+        event.updateMenuDiscount(menuDiscount);
+        return menuDiscount;
+    }
+
+    private int calculateStarDayDiscount() {
+        if (date.isStared()) {
+            event.updateStarDiscount(DISCOUNT_STARDAY);
+        }
+        return DISCOUNT_STARDAY;
+    }
+
+    private int calculateDDayDiscount() {
+        int dDayDiscount = date.getDDayDiscount();
+        event.updateDDayDiscount(dDayDiscount);
+        return dDayDiscount;
     }
 
 }

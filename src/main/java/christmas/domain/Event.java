@@ -14,6 +14,18 @@ public class Event {
         return new EventDTO(dDay, menu, star, champagne);
     }
 
+    public void updateMenuDiscount(int menuDiscount) {
+        this.menuDiscount += menuDiscount;
+    }
+
+    public void updateStarDiscount(int starDiscount) {
+        this.starDiscount += starDiscount;
+    }
+
+    public void updateDDayDiscount(int dDayDiscount) {
+        this.dDayDiscount += dDayDiscount;
+    }
+
     public void updateChampagneEvent(int bought) {
         champagneEvent = bought >= 120_000;
     }
