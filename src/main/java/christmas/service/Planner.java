@@ -4,6 +4,7 @@ import christmas.model.DateManager;
 import christmas.model.MenuManager;
 
 public class Planner {
+    private final int DISCOUNT_STAR = 1000;
     private final DateManager date;
     private final MenuManager menu;
 
@@ -13,21 +14,27 @@ public class Planner {
     }
 
     public void calculateTotalPrice() {
-        int total = 0;
-        total += calculateMenuPrice();
+        int total = calculateMenuPrice();
         total -= calculateMenuDiscounts();
+        total -= calculateStarDayDiscount();
     }
 
 
     private int calculateMenuPrice() {
-        int menuPrice = menu.getMenusPrice();
-        return menuPrice;
+        return menu.getMenusPrice();
     }
 
     private int calculateMenuDiscounts() {
         String weekendDiscount = date.getWeekendDiscount();
         int menuDiscount = menu.getMenusDiscount(weekendDiscount);
         return menuDiscount;
+    }
+
+    private int calculateStarDayDiscount() {
+        if (date.isStared()) {
+            return DISCOUNT_STAR;
+        }
+        return 0;
     }
 
 }
