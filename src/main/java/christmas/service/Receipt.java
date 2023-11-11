@@ -16,4 +16,16 @@ public class Receipt {
         this.price = price;
     }
 
+    public DateDTO getDate() {
+        return date;
+    }
+
+    public List<MenuDTO> getMenus() {
+        return menus;
+    }
+
+    public PriceDTO getPrice() {
+        return price;
+    }
+
 }
