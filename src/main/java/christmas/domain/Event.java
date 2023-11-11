@@ -6,7 +6,6 @@ import static christmas.utils.constants.Integers.DISCOUNT_DDAY_MULTIPLIER;
 import static christmas.utils.constants.Integers.DISCOUNT_MENU;
 import static christmas.utils.constants.Integers.DISCOUNT_STARDAY;
 
-import christmas.domain.enums.Badges;
 import christmas.dto.DateDTO;
 import christmas.dto.EventDTO;
 import christmas.dto.MenuDTO;
@@ -14,24 +13,27 @@ import java.util.List;
 
 public class Event {
     private final int dDayDiscount, menuDiscount, starDiscount;
-    private final boolean champagneEvent;
-    private final String badge;
 
     public Event(DateDTO date, List<MenuDTO> menus) {
         this.menuDiscount = calculateMenuDistount(date, menus);
         this.dDayDiscount = calculateDDayDiscount(date);
         this.starDiscount = calculateStarDiscount(date);
-        int benefit = menuDiscount + dDayDiscount + starDiscount;
-
-        this.champagneEvent = isChampagneEvent(benefit);
-        this.badge = getBadge(benefit);
     }
 
 
     public EventDTO toDTO() {
-        return new EventDTO(dDayDiscount, menuDiscount, starDiscount, champagneEvent, badge);
+        return new EventDTO(dDayDiscount, menuDiscount, starDiscount);
     }
 
+
+    public int getTotalBenefit() {
+        return menuDiscount + dDayDiscount + starDiscount;
+    }
+
+
+    public boolean isChampagne(int price) {
+        return price >= CHAMPAGNE_CONDITION.getValue();
+    }
 
     private int calculateMenuDistount(DateDTO date, List<MenuDTO> menus) {
         int discount = 0;
@@ -59,14 +61,6 @@ public class Event {
             discount += DISCOUNT_STARDAY.getValue();
         }
         return discount;
-    }
-
-    private boolean isChampagneEvent(int benefit) {
-        return benefit >= CHAMPAGNE_CONDITION.getValue();
-    }
-
-    private String getBadge(int benefit) {
-        return Badges.getBadgeByBenefit(benefit);
     }
 
 }
