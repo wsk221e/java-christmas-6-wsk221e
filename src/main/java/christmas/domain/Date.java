@@ -22,7 +22,7 @@ public class Date {
     }
 
     public DateDTO toDTO() {
-        return new DateDTO(getDiscountCategory(), isStared(), getDDay());
+        return new DateDTO(getDiscountCategory(), isWeekend(), isStared(), date, getDDay());
     }
 
 
@@ -31,6 +31,10 @@ public class Date {
             return DISCOUNT_WEEKEND.getName();
         }
         return DISCOUNT_WEEKDAY.getName();
+    }
+
+    private boolean isWeekend() {
+        return weekendDate.contains(date);
     }
 
     private boolean isStared() {
