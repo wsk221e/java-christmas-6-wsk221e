@@ -1,33 +1,72 @@
 package christmas.domain;
 
+import static christmas.utils.constants.Integers.CHAMPAGNE_CONDITION;
+import static christmas.utils.constants.Integers.DISCOUNT_DDAY_MAX;
+import static christmas.utils.constants.Integers.DISCOUNT_DDAY_MULTIPLIER;
+import static christmas.utils.constants.Integers.DISCOUNT_MENU;
+import static christmas.utils.constants.Integers.DISCOUNT_STARDAY;
+
+import christmas.domain.enums.Badges;
+import christmas.dto.DateDTO;
 import christmas.dto.EventDTO;
+import christmas.dto.MenuDTO;
+import java.util.List;
 
 public class Event {
-    private int dDayDiscount, menuDiscount, starDiscount;
-    private boolean champagneEvent;
+    private final int dDayDiscount, menuDiscount, starDiscount;
+    private final boolean champagneEvent;
+    private final String badge;
+
+    public Event(DateDTO date, List<MenuDTO> menus) {
+        this.menuDiscount = calculateMenuDistount(date, menus);
+        this.dDayDiscount = calculateDDayDiscount(date);
+        this.starDiscount = calculateStarDiscount(date);
+        int benefit = menuDiscount + dDayDiscount + starDiscount;
+
+        this.champagneEvent = isChampagneEvent(benefit);
+        this.badge = getBadge(benefit);
+    }
+
 
     public EventDTO toDTO() {
-        int dDay = this.dDayDiscount;
-        int menu = this.menuDiscount;
-        int star = this.starDiscount;
-        boolean champagne = this.champagneEvent;
-        return new EventDTO(dDay, menu, star, champagne);
+        return new EventDTO(dDayDiscount, menuDiscount, starDiscount, champagneEvent, badge);
     }
 
-    public void updateMenuDiscount(int menuDiscount) {
-        this.menuDiscount += menuDiscount;
+
+    private int calculateMenuDistount(DateDTO date, List<MenuDTO> menus) {
+        int discount = 0;
+        for (MenuDTO menu : menus) {
+            boolean discountCondition = date.discountCategory.contains(menu.category);
+            if (discountCondition) {
+                discount += DISCOUNT_MENU.getValue();
+            }
+        }
+        return discount;
     }
 
-    public void updateStarDiscount(int starDiscount) {
-        this.starDiscount += starDiscount;
+    private int calculateDDayDiscount(DateDTO date) {
+        int discount = 0;
+        int dDay = date.dDay;
+        if (dDay >= 0) {
+            discount = DISCOUNT_DDAY_MAX.getValue() - DISCOUNT_DDAY_MULTIPLIER.getValue() * dDay;
+        }
+        return discount;
     }
 
-    public void updateDDayDiscount(int dDayDiscount) {
-        this.dDayDiscount += dDayDiscount;
+    private int calculateStarDiscount(DateDTO date) {
+        int discount = 0;
+        if (date.isStared) {
+            discount += DISCOUNT_STARDAY.getValue();
+        }
+        return discount;
     }
 
-    public void updateChampagneEvent(int bought) {
-        champagneEvent = bought >= 120_000;
+    private boolean isChampagneEvent(int benefit) {
+        return benefit >= CHAMPAGNE_CONDITION.getValue();
+    }
+
+    private String getBadge(int benefit) {
+        return Badges.getBadgeByBenefit(benefit);
     }
 
 }

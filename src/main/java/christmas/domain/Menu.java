@@ -2,37 +2,30 @@ package christmas.domain;
 
 import static christmas.utils.validation.ValidatorMenu.validateMenu;
 
+import christmas.domain.enums.Menus;
+import christmas.dto.MenuDTO;
 import christmas.utils.Parser;
 
 public class Menu {
     private final String name;
+    private final String category;
     private final int amount;
 
     public Menu(String name, String amountString) {
         int amount = Parser.parseInt(amountString);
         validateMenu(name, amount);
 
+        this.category = Menus.getCategoryByName(name);
         this.name = name;
         this.amount = amount;
     }
 
+    public MenuDTO toDTO() {
 
-    public String getName() {
-        String string = this.name;
-        return string;
+        return new MenuDTO(name, category, amount, getPrice());
     }
 
-    public int getAmount() {
-        int value = this.amount;
-        return value;
-    }
-
-    public boolean isCategory(String string) {
-        String category = Menus.getCategoryByName(name);
-        return category.equals(string);
-    }
-
-    public int getPrice() {
+    private int getPrice() {
         return Menus.getPriceByName(name);
     }
 

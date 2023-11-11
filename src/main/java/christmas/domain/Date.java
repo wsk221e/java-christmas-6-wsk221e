@@ -3,11 +3,16 @@ package christmas.domain;
 import static christmas.utils.constants.Integers.DATE_RANGE_MAX;
 import static christmas.utils.constants.Integers.DATE_RANGE_MIN;
 import static christmas.utils.constants.Integers.D_DAY;
+import static christmas.utils.constants.Strings.DISCOUNT_WEEKDAY;
+import static christmas.utils.constants.Strings.DISCOUNT_WEEKEND;
 
+import christmas.dto.DateDTO;
 import christmas.utils.Parser;
 import java.util.List;
 
 public class Date {
+    private final List<Integer> weekendDate = List.of(1, 2, 8, 9, 15, 16, 22, 23, 29, 30);
+    private final List<Integer> staredDate = List.of(3, 10, 17, 24, 25, 31);
     private final int date;
 
     public Date(String string) {
@@ -16,21 +21,26 @@ public class Date {
         this.date = date;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(date);
+    public DateDTO toDTO() {
+        return new DateDTO(getDiscountCategory(), isStared(), getDDay());
     }
 
-    public Boolean isIncluded(List<Integer> dateList) {
-        if (dateList.contains(date)) {
-            return true;
+
+    private String getDiscountCategory() {
+        if (weekendDate.contains(date)) {
+            return DISCOUNT_WEEKEND.getName();
         }
-        return false;
+        return DISCOUNT_WEEKDAY.getName();
     }
 
-    public int getDDay() {
+    private boolean isStared() {
+        return staredDate.contains(date);
+    }
+
+    private int getDDay() {
         return D_DAY.getValue() - date;
     }
+
 
     private void validate(int date) {
         if (date < DATE_RANGE_MIN.getValue() || date > DATE_RANGE_MAX.getValue()) {

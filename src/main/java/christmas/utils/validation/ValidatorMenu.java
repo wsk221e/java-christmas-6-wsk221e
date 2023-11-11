@@ -2,8 +2,8 @@ package christmas.utils.validation;
 
 import static christmas.utils.constants.Strings.MENU_ONLY_FORBIDDEN;
 
-import christmas.domain.Menu;
-import christmas.domain.Menus;
+import christmas.domain.enums.Menus;
+import christmas.dto.MenuDTO;
 import christmas.utils.constants.Integers;
 import java.util.HashSet;
 import java.util.List;
@@ -19,7 +19,7 @@ public class ValidatorMenu {
         validateMenuAmount(amount);
     }
 
-    public static void validateMenus(List<Menu> menus) {
+    public static void validateMenus(List<MenuDTO> menus) {
         validateMenusTotalAmount(menus);
         validateMenusDuplicated(menus);
         validateMenusOnlyDrinks(menus);
@@ -41,35 +41,36 @@ public class ValidatorMenu {
     }
 
 
-    private static void validateMenusTotalAmount(List<Menu> menus) {
+    private static void validateMenusTotalAmount(List<MenuDTO> menus) {
         int total = 0;
-        for (Menu menu : menus) {
-            total += menu.getAmount();
+        for (MenuDTO menu : menus) {
+            total += menu.amount;
         }
         if (total > AMOUNT_RANGE_MAX) {
             throw new IllegalStateException();
         }
     }
 
-    private static void validateMenusDuplicated(List<Menu> menus) {
+    private static void validateMenusDuplicated(List<MenuDTO> menus) {
         Set<String> isDuplicated = new HashSet<>();
-        for (Menu menu : menus) {
-            String name = menu.getName();
+        for (MenuDTO menu : menus) {
+            String name = menu.name;
             if (!isDuplicated.add(name)) {
                 throw new IllegalStateException();
             }
         }
     }
 
-    private static void validateMenusOnlyDrinks(List<Menu> menus) {
+    private static void validateMenusOnlyDrinks(List<MenuDTO> menus) {
         int total = 0;
         int forbidden = 0;
-        for (Menu menu : menus) {
-            if (menu.isCategory(MENU_ONLY_FORBIDDEN.getName())) {
+        for (MenuDTO menu : menus) {
+            boolean forbiddenCondition = menu.category.equals(MENU_ONLY_FORBIDDEN.getName());
+            if (forbiddenCondition) {
                 total++;
                 forbidden++;
             }
-            if (!menu.isCategory(MENU_ONLY_FORBIDDEN.getName())) {
+            if (!forbiddenCondition) {
                 total++;
             }
         }
