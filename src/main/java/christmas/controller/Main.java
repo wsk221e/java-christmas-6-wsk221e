@@ -23,7 +23,7 @@ public class Main {
                 String date = request.getUserDate();
                 initializer.processDate(date);
                 break;
-            } catch (Exception e) {
+            } catch (IllegalArgumentException | IllegalStateException e) {
                 request.displayDateError();
             }
         }
@@ -35,7 +35,7 @@ public class Main {
                 String menu = request.getUserMenu();
                 initializer.processMenu(menu);
                 break;
-            } catch (Exception e) {
+            } catch (IllegalArgumentException | IllegalStateException e) {
                 request.displayMenuError();
             }
         }
