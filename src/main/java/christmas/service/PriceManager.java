@@ -1,14 +1,13 @@
 package christmas.service;
 
+import static christmas.utils.constants.Integers.DISCOUNT_STARDAY;
+
 import christmas.domain.Event;
-import christmas.domain.Price;
 import christmas.dto.EventDTO;
 import christmas.model.DateManager;
 import christmas.model.MenuManager;
-import christmas.utils.constants.Integers;
 
 public class PriceManager {
-    private final int DISCOUNT_STARDAY = Integers.DISCOUNT_STARDAY.getValue();
     private final DateManager date;
     private final MenuManager menu;
     private final Event event;
@@ -19,16 +18,15 @@ public class PriceManager {
         this.event = new Event();
     }
 
-    public Price calculateTotalPrice() {
+    public int getTotalPrice() {
         int total = calculateMenuPrice();
-        total -= calculateMenuDiscounts();
-        total -= calculateStarDayDiscount();
-        total -= calculateDDayDiscount();
-        Price price = new Price(total);
-        return price;
+        calculateMenuDiscounts();
+        calculateStarDayDiscount();
+        calculateDDayDiscount();
+        return total;
     }
 
-    public EventDTO getEventInformation() {
+    public EventDTO getEventStatus() {
         return event.toDTO();
     }
 
@@ -46,9 +44,9 @@ public class PriceManager {
 
     private int calculateStarDayDiscount() {
         if (date.isStared()) {
-            event.updateStarDiscount(DISCOUNT_STARDAY);
+            event.updateStarDiscount(DISCOUNT_STARDAY.getValue());
         }
-        return DISCOUNT_STARDAY;
+        return DISCOUNT_STARDAY.getValue();
     }
 
     private int calculateDDayDiscount() {

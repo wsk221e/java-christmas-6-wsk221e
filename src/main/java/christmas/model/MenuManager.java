@@ -1,13 +1,13 @@
 package christmas.model;
 
+import static christmas.utils.constants.Integers.DISCOUNT_WEEKEND;
 import static christmas.utils.validation.ValidatorMenu.validateMenus;
 
 import christmas.domain.Menu;
-import christmas.utils.constants.Integers;
+import christmas.dto.MenusDTO;
 import java.util.List;
 
 public class MenuManager {
-    private final int DISCOUNT_WEEKEND = Integers.DISCOUNT_WEEKEND.getValue();
     private final List<Menu> menus;
 
     public MenuManager(List<Menu> menus) {
@@ -15,6 +15,11 @@ public class MenuManager {
         this.menus = menus;
     }
 
+
+    public MenusDTO toDTO() {
+        List<Menu> menus = this.menus;
+        return new MenusDTO(menus);
+    }
 
     public int getMenusPrice() {
         int sum = 0;
@@ -41,7 +46,7 @@ public class MenuManager {
         int sum = 0;
         for (Menu menu : menus) {
             if (menu.isCategory(weekendDiscount)) {
-                sum += DISCOUNT_WEEKEND;
+                sum += DISCOUNT_WEEKEND.getValue();
             }
         }
         return sum;

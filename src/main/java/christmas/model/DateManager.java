@@ -18,6 +18,11 @@ public class DateManager {
         this.date = date;
     }
 
+    public int getDate() {
+        String value = this.date.toString();
+        int date = Integer.parseInt(value);
+        return date;
+    }
 
     public String getWeekendDiscount() {
         if (date.isIncluded(weekendDate)) {

@@ -16,6 +16,10 @@ public class Date {
         this.date = date;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(date);
+    }
 
     public Boolean isIncluded(List<Integer> dateList) {
         if (dateList.contains(date)) {

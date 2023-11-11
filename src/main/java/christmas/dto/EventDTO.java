@@ -2,8 +2,7 @@ package christmas.dto;
 
 import static christmas.utils.constants.Integers.CHAMPAGNE_PRICE;
 
-import java.util.ArrayList;
-import java.util.List;
+import christmas.domain.Badges;
 
 public class EventDTO {
     private final int total, dDay, menu, star;
@@ -17,12 +16,19 @@ public class EventDTO {
         this.total = calculateTotal();
     }
 
-    public List<Integer> getDiscountInfo() {
-        return new ArrayList<>(List.of(dDay, menu, star, total));
-    }
-
     public boolean isChampagneEvent() {
         return champagne;
+    }
+
+    public int getTotalBenefit() {
+        int value = total;
+        return value;
+    }
+
+    public String getEventBadge() {
+        int benefit = getTotalBenefit();
+        String badge = Badges.getBadgeByBenefit(benefit);
+        return badge;
     }
 
     private int calculateTotal() {
