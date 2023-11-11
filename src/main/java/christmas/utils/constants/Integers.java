@@ -14,7 +14,8 @@ public enum Integers {
     MENU_SPLIT_SIZE(2),
     DISCOUNT_STARDAY(1000),
     AMOUNT_RANGE_MIN(1),
-    AMOUNT_RANGE_MAX(20);
+    AMOUNT_RANGE_MAX(20),
+    PRESENT_AMOUNT(1);
 
     private final int value;
 
