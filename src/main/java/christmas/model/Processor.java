@@ -1,16 +1,16 @@
 package christmas.model;
 
+import static christmas.utils.constants.Integers.INDEXOF_AMOUNT;
+import static christmas.utils.constants.Integers.INDEXOF_MENU;
+import static christmas.utils.constants.Integers.MENU_SPLIT_SIZE;
+
 import christmas.domain.Date;
 import christmas.domain.Menu;
 import christmas.service.Planner;
-import christmas.utils.constants.Integers;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Processor {
-    private static final int INDEXOF_MENU = Integers.INDEXOF_MENU.getValue();
-    private static final int INDEXOF_AMOUNT = Integers.INDEXOF_AMOUNT.getValue();
-    private static final int MENU_SPLIT_SIZE = Integers.MENU_SPLIT_SIZE.getValue();
     private DateManager dateManager;
     private MenuManager menuManager;
     private Planner planner;
@@ -40,13 +40,13 @@ public class Processor {
             List<String> menu = List.of(menuAndAmount.split("-"));
             validateLength(menu);
 
-            menus.add(new Menu(menu.get(INDEXOF_MENU), menu.get(INDEXOF_AMOUNT)));
+            menus.add(new Menu(menu.get(INDEXOF_MENU.getValue()), menu.get(INDEXOF_AMOUNT.getValue())));
         }
         return menus;
     }
 
     private void validateLength(List<String> menu) {
-        if (!(menu.size() == MENU_SPLIT_SIZE)) {
+        if (!(menu.size() == MENU_SPLIT_SIZE.getValue())) {
             throw new IllegalArgumentException();
         }
     }
