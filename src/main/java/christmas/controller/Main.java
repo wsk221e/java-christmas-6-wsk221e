@@ -5,13 +5,15 @@ import christmas.service.Receipt;
 
 public class Main {
     private final RequestController request = new RequestController();
+    private final AnnounceController announce = new AnnounceController();
     private final Initializer initializer = new Initializer();
 
 
     public void start() {
         requestGetUserDate();
         requestGetUserMenu();
-        doService();
+        Receipt result = doService();
+        announce.displayResult(result);
     }
 
 
@@ -39,9 +41,9 @@ public class Main {
         }
     }
 
-    private void doService() {
+    private Receipt doService() {
         Planner planner = initializer.generatePlanner();
-        Receipt result = planner.getReserveInformation();
+        return planner.getReserveInformation();
     }
 
 }
