@@ -23,7 +23,7 @@ public class PriceManager {
     private int calculateTotalPrice(List<MenuDTO> menus) {
         int sum = 0;
         for (MenuDTO menu : menus) {
-            sum += menu.price;
+            sum += menu.price * menu.amount;
         }
         return sum;
     }

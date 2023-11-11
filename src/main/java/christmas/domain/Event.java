@@ -38,7 +38,7 @@ public class Event {
         for (MenuDTO menu : menus) {
             boolean discountCondition = date.discountCategory.contains(menu.category);
             if (discountCondition) {
-                discount += DISCOUNT_MENU.getValue();
+                discount += DISCOUNT_MENU.getValue() * menu.amount;
             }
         }
         return discount;
