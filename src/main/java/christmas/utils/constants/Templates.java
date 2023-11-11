@@ -36,7 +36,7 @@ public enum Templates {
     // Features
     @Override
     public String toString() {
-        return message;
+        return message.replace("\n", System.lineSeparator());
     }
 
     public String format(Object... args) {
@@ -51,7 +51,7 @@ public enum Templates {
                 formattedArgs[i] = args[i];
             }
         }
-        return String.format(this.message, formattedArgs);
+        return String.format(this.toString(), formattedArgs);
     }
 
     private Object tryParseInt(Object arg) {
