@@ -9,6 +9,7 @@ import christmas.model.PriceManager;
 import java.util.List;
 
 public class Planner {
+    // Fields, Constructor
     private final DateManager dateManager;
     private final MenuManager menuManager;
 
@@ -18,10 +19,13 @@ public class Planner {
     }
 
 
+    // Features
     public Receipt getReserveInformation() {
         return getOrderDetails();
     }
 
+    
+    // Internal Implements
     private Receipt getOrderDetails() {
         DateDTO date = dateManager.getDate();
         List<MenuDTO> menus = menuManager.getMenus();

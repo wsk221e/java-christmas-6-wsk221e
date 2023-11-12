@@ -1,5 +1,8 @@
 package christmas.utils.validation;
 
+import static christmas.utils.constants.Integers.DATE_RANGE_MAX;
+import static christmas.utils.constants.Integers.DATE_RANGE_MIN;
+import static christmas.utils.constants.Integers.MENU_SPLIT_SIZE;
 import static christmas.utils.constants.Strings.MENU_ONLY_FORBIDDEN;
 
 import christmas.domain.enums.Menus;
@@ -9,10 +12,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ValidatorMenu {
+public class Validator {
+    // Fields
     private static final int AMOUNT_RANGE_MIN = Integers.AMOUNT_RANGE_MIN.getValue();
     private static final int AMOUNT_RANGE_MAX = Integers.AMOUNT_RANGE_MAX.getValue();
 
+
+    // Features
+    public static void validateDate(int date) {
+        if (date < DATE_RANGE_MIN.getValue() || date > DATE_RANGE_MAX.getValue()) {
+            throw new IllegalArgumentException();
+        }
+    }
 
     public static void validateMenu(String name, int amount) {
         validateMenuName(name);
@@ -25,7 +36,14 @@ public class ValidatorMenu {
         validateMenusOnlyDrinks(menus);
     }
 
+    public static void validateParsedMenuLength(List<String> menu) {
+        if (!(menu.size() == MENU_SPLIT_SIZE.getValue())) {
+            throw new IllegalArgumentException();
+        }
+    }
 
+
+    // Internal Implements
     private static void validateMenuName(String name) {
         try {
             Menus.valueOf(name);

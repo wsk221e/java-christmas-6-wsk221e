@@ -5,6 +5,7 @@ import christmas.dto.PriceDTO;
 import christmas.utils.constants.Integers;
 
 public class Price {
+    // Fields, Constructor
     private final int price, discount, benefit;
     private final Event event;
     private final boolean isChampagne;
@@ -20,11 +21,13 @@ public class Price {
     }
 
 
+    // Features
     public PriceDTO toDTO() {
         return new PriceDTO(price, discount, benefit, event.toDTO(), isChampagne, badge);
     }
 
 
+    // Internal Implements
     private int calculateTotalDiscount() {
         int discount = event.getTotalBenefit();
         return discount;

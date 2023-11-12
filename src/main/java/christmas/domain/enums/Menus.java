@@ -1,6 +1,7 @@
 package christmas.domain.enums;
 
 public enum Menus {
+    // Values, Fields, Constructor
     양송이수프("애피타이저", 6_000),
     타파스("애피타이저", 5_500),
     시저샐러드("애피타이저", 8_000),
@@ -23,6 +24,7 @@ public enum Menus {
     }
 
 
+    // Features
     public static String getCategoryByName(String name) {
         Menus menu = Menus.valueOf(name);
         return menu.category;

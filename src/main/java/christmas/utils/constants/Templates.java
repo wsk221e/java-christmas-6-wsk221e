@@ -54,6 +54,8 @@ public enum Templates {
         return String.format(this.toString(), formattedArgs);
     }
 
+
+    // Internal Implements
     private Object tryParseInt(Object arg) {
         String string = arg.toString();
         try {

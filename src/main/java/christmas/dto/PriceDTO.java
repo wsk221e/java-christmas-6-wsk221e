@@ -1,6 +1,7 @@
 package christmas.dto;
 
 public class PriceDTO {
+    // Fields, Constructor
     public final int price, discount, benefit;
     public final EventDTO event;
     public final boolean isChampagne;

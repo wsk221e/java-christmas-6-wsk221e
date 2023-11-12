@@ -1,12 +1,13 @@
 package christmas.domain;
 
-import static christmas.utils.validation.ValidatorMenu.validateMenu;
+import static christmas.utils.validation.Validator.validateMenu;
 
 import christmas.domain.enums.Menus;
 import christmas.dto.MenuDTO;
 import christmas.utils.Utils;
 
 public class Menu {
+    // Fields, Constructor
     private final String name;
     private final String category;
     private final int amount;
@@ -20,11 +21,15 @@ public class Menu {
         this.amount = amount;
     }
 
+
+    // Features
     public MenuDTO toDTO() {
 
         return new MenuDTO(name, category, amount, getPrice());
     }
 
+
+    // Internal Implements
     private int getPrice() {
         return Menus.getPriceByName(name);
     }

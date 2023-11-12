@@ -4,11 +4,13 @@ import christmas.service.Planner;
 import christmas.service.Receipt;
 
 public class Main {
+    // Fields
     private final RequestController request = new RequestController();
     private final AnnounceController announce = new AnnounceController();
     private final Initializer initializer = new Initializer();
 
 
+    // Features
     public void start() {
         requestGetUserDate();
         requestGetUserMenu();
@@ -16,6 +18,8 @@ public class Main {
         requestDisplayResult(result);
     }
 
+
+    // Internal Implements
     private void requestGetUserDate() {
         while (true) {
             try {

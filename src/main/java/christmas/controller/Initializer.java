@@ -9,10 +9,12 @@ import christmas.utils.Utils;
 import java.util.List;
 
 public class Initializer {
+    // Fields
     private DateManager dateManager;
     private MenuManager menuManager;
 
 
+    // Features
     public void processDate(String string) {
         Date date = new Date(string);
         dateManager = new DateManager(date);

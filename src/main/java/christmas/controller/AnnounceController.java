@@ -12,9 +12,11 @@ import christmas.view.OutputView;
 import java.util.List;
 
 public class AnnounceController {
+    // Fields
     private final OutputView announce = new OutputView();
 
 
+    // Features
     public void displayResult(Receipt result) {
         DateDTO date = result.getDate();
         List<MenuDTO> menus = result.getMenus();
@@ -31,22 +33,29 @@ public class AnnounceController {
         displayBadge(price);
     }
 
-    public void displayGreetings(DateDTO date) {
+
+    // Internal Implements
+    private void displayFormatString(Templates template, Object... values) {
+        String string = template.format(values);
+        announce.displayString(string);
+    }
+
+    private void displayGreetings(DateDTO date) {
         displayFormatString(Templates.OUTPUT_GREETINGS_MESSAGE, date.date);
     }
 
-    public void displayMenu(List<MenuDTO> menus) {
+    private void displayMenu(List<MenuDTO> menus) {
         announce.displayString(Templates.OUTPUT_MENU_MESSAGE);
         for (MenuDTO menu : menus) {
             displayFormatString(Templates.OUTPUT_INNER_FORMAT_MENU, menu.name, menu.amount);
         }
     }
 
-    public void displayTotalPrice(PriceDTO price) {
+    private void displayTotalPrice(PriceDTO price) {
         displayFormatString(Templates.OUTPUT_PRICE_TOTAL_MESSAGE, price.price);
     }
 
-    public void displayPresent(PriceDTO price) {
+    private void displayPresent(PriceDTO price) {
         String string = Templates.OUTPUT_PRESENT_MESSAGE.format(Templates.OUTPUT_NONE_MESSAGE);
         if (price.isChampagne) {
             String innerString = Templates.OUTPUT_INNER_FORMAT_MENU.format(Strings.PRESENT.getName(),
@@ -56,7 +65,7 @@ public class AnnounceController {
         announce.displayString(string);
     }
 
-    public void displayBenefits(DateDTO date, PriceDTO price, EventDTO event) {
+    private void displayBenefits(DateDTO date, PriceDTO price, EventDTO event) {
         boolean benefitCondition = calculateBenefitDisplayCondition(event, price);
         announce.displayString(Templates.OUTPUT_BENEFIT_STATUS_MESSAGE);
         if (benefitCondition) {
@@ -67,31 +76,6 @@ public class AnnounceController {
             announce.displayString(none);
         }
 
-    }
-
-    public void displayTotalBenefit(PriceDTO price) {
-        displayFormatString(Templates.OUTPUT_TOTAL_BENEFIT_MESSAGE, price.benefit);
-    }
-
-    public void displayFinalPrice(PriceDTO price) {
-        String finalPrice = String.valueOf(price.price - price.discount);
-        displayFormatString(Templates.OUTPUT_PRICE_FINAL_MESSAGE, finalPrice);
-    }
-
-    public void displayBadge(PriceDTO price) {
-        boolean badgeCondition = !price.badge.equals("");
-        if (badgeCondition) {
-            displayFormatString(Templates.OUTPUT_BADGE_MESSAGE, price.badge);
-        }
-        if (!badgeCondition) {
-            displayFormatString(Templates.OUTPUT_BADGE_MESSAGE, Templates.OUTPUT_NONE_MESSAGE);
-        }
-    }
-
-
-    private void displayFormatString(Templates template, Object... values) {
-        String string = template.format(values);
-        announce.displayString(string);
     }
 
     private boolean calculateBenefitDisplayCondition(EventDTO event, PriceDTO price) {
@@ -130,6 +114,25 @@ public class AnnounceController {
     private void displayBenefitDetailsChampagne(PriceDTO price) {
         if (price.isChampagne) {
             displayFormatString(Templates.OUTPUT_DISCOUNT_PRESENT, Integers.CHAMPAGNE_PRICE.getValue());
+        }
+    }
+
+    private void displayTotalBenefit(PriceDTO price) {
+        displayFormatString(Templates.OUTPUT_TOTAL_BENEFIT_MESSAGE, price.benefit);
+    }
+
+    private void displayFinalPrice(PriceDTO price) {
+        String finalPrice = String.valueOf(price.price - price.discount);
+        displayFormatString(Templates.OUTPUT_PRICE_FINAL_MESSAGE, finalPrice);
+    }
+
+    private void displayBadge(PriceDTO price) {
+        boolean badgeCondition = !price.badge.equals("");
+        if (badgeCondition) {
+            displayFormatString(Templates.OUTPUT_BADGE_MESSAGE, price.badge);
+        }
+        if (!badgeCondition) {
+            displayFormatString(Templates.OUTPUT_BADGE_MESSAGE, Templates.OUTPUT_NONE_MESSAGE);
         }
     }
 

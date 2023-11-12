@@ -12,6 +12,7 @@ import christmas.dto.MenuDTO;
 import java.util.List;
 
 public class Event {
+    // Fields, Constructor
     private final int dDayDiscount, menuDiscount, starDiscount;
 
     public Event(DateDTO date, List<MenuDTO> menus) {
@@ -21,6 +22,7 @@ public class Event {
     }
 
 
+    // Features
     public EventDTO toDTO() {
         return new EventDTO(dDayDiscount, menuDiscount, starDiscount);
     }
@@ -35,6 +37,8 @@ public class Event {
         return price >= CHAMPAGNE_CONDITION.getValue();
     }
 
+
+    // Internal Implements
     private int calculateMenuDistount(DateDTO date, List<MenuDTO> menus) {
         int discount = 0;
         for (MenuDTO menu : menus) {

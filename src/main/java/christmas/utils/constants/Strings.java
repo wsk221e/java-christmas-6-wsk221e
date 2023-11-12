@@ -1,6 +1,7 @@
 package christmas.utils.constants;
 
 public enum Strings {
+    // Values, Fields, Constructor
     DISCOUNT_WEEKEND("메인"),
     DISCOUNT_WEEKDAY("디저트"),
     MENU_ONLY_FORBIDDEN("음료"),
@@ -13,6 +14,8 @@ public enum Strings {
         this.name = name;
     }
 
+
+    // Features
     public String getName() {
         return name;
     }

@@ -1,6 +1,7 @@
 package christmas.dto;
 
 public class MenuDTO {
+    // Fields, Constructor
     public final String name, category;
     public final int amount, price;
 

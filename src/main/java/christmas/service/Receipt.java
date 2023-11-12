@@ -6,6 +6,7 @@ import christmas.dto.PriceDTO;
 import java.util.List;
 
 public class Receipt {
+    // Fields, Constructor
     private final DateDTO date;
     private final List<MenuDTO> menus;
     private final PriceDTO price;
@@ -16,6 +17,8 @@ public class Receipt {
         this.price = price;
     }
 
+
+    // Features
     public DateDTO getDate() {
         return date;
     }

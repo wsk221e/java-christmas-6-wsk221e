@@ -8,6 +8,7 @@ import christmas.dto.PriceDTO;
 import java.util.List;
 
 public class PriceManager {
+    // Fields, Constructor
     private final Price price;
 
     public PriceManager(DateDTO date, List<MenuDTO> menus) {
@@ -15,11 +16,14 @@ public class PriceManager {
         this.price = new Price(calculateTotalPrice(menus), event);
     }
 
+
+    // Features
     public PriceDTO getPrice() {
         return price.toDTO();
     }
 
 
+    // Internal Implements
     private int calculateTotalPrice(List<MenuDTO> menus) {
         int sum = 0;
         for (MenuDTO menu : menus) {

@@ -1,6 +1,7 @@
 package christmas.domain.enums;
 
 public enum Badges {
+    // Values, Fields, Constructor
     별(5_000),
     트리(10_000),
     산타(20_000);
@@ -11,6 +12,8 @@ public enum Badges {
         this.benefit = benefit;
     }
 
+
+    // Features
     public static String getBadgeByBenefit(int benefit) {
         String highest = "";
         for (Badges badge : Badges.values()) {

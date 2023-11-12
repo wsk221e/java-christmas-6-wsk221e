@@ -1,6 +1,7 @@
 package christmas.utils.constants;
 
 public enum Integers {
+    // Values, Fields, Constructor
     DATE_RANGE_MIN(1),
     DATE_RANGE_MAX(31),
     D_DAY(25),
@@ -24,6 +25,7 @@ public enum Integers {
     }
 
 
+    // Features
     public int getValue() {
         return value;
     }
