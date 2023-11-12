@@ -1,11 +1,12 @@
 package christmas.controller;
 
-import christmas.view.DisplayError;
+import christmas.utils.constants.Templates;
 import christmas.view.InputView;
+import christmas.view.OutputView;
 
 public class RequestController {
     private final InputView input = new InputView();
-    private final DisplayError error = new DisplayError();
+    private final OutputView output = new OutputView();
 
 
     public String getUserDate() {
@@ -13,7 +14,7 @@ public class RequestController {
     }
 
     public void displayDateError() {
-        error.displayDateError();
+        output.displayString(Templates.ERROR_DATE_MESSAEGE);
     }
 
     public String getUserMenu() {
@@ -21,7 +22,7 @@ public class RequestController {
     }
 
     public void displayMenuError() {
-        error.displayMenuError();
+        output.displayString(Templates.ERROR_MENU_MESSAEGE);
     }
 
 }

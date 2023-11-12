@@ -8,11 +8,12 @@ import christmas.service.Receipt;
 import christmas.utils.constants.Integers;
 import christmas.utils.constants.Strings;
 import christmas.utils.constants.Templates;
-import christmas.view.DisplayAnnounce;
+import christmas.view.OutputView;
 import java.util.List;
 
 public class AnnounceController {
-    private final DisplayAnnounce announce = new DisplayAnnounce();
+    private final OutputView announce = new OutputView();
+
 
     public void displayResult(Receipt result) {
         DateDTO date = result.getDate();
@@ -30,26 +31,22 @@ public class AnnounceController {
         displayBadge(price);
     }
 
-
-    private void displayGreetings(DateDTO date) {
-        String string = Templates.OUTPUT_GREETINGS_MESSAGE.format(date.date);
-        announce.displayString(string);
+    public void displayGreetings(DateDTO date) {
+        displayFormatString(Templates.OUTPUT_GREETINGS_MESSAGE, date.date);
     }
 
-    private void displayMenu(List<MenuDTO> menus) {
+    public void displayMenu(List<MenuDTO> menus) {
         announce.displayString(Templates.OUTPUT_MENU_MESSAGE);
         for (MenuDTO menu : menus) {
-            String string = Templates.OUTPUT_INNER_FORMAT_MENU.format(menu.name, menu.amount);
-            announce.displayString(string);
+            displayFormatString(Templates.OUTPUT_INNER_FORMAT_MENU, menu.name, menu.amount);
         }
     }
 
-    private void displayTotalPrice(PriceDTO price) {
-        String string = Templates.OUTPUT_PRICE_TOTAL_MESSAGE.format(price.price);
-        announce.displayString(string);
+    public void displayTotalPrice(PriceDTO price) {
+        displayFormatString(Templates.OUTPUT_PRICE_TOTAL_MESSAGE, price.price);
     }
 
-    private void displayPresent(PriceDTO price) {
+    public void displayPresent(PriceDTO price) {
         String string = Templates.OUTPUT_PRESENT_MESSAGE.format(Templates.OUTPUT_NONE_MESSAGE);
         if (price.isChampagne) {
             String innerString = Templates.OUTPUT_INNER_FORMAT_MENU.format(Strings.PRESENT.getName(),
@@ -59,51 +56,81 @@ public class AnnounceController {
         announce.displayString(string);
     }
 
-    private void displayBenefits(DateDTO date, PriceDTO price, EventDTO event) {
-        boolean noneCondition = event.dDay == 0 && event.menu == 0 && event.star == 0 && !price.isChampagne;
+    public void displayBenefits(DateDTO date, PriceDTO price, EventDTO event) {
+        boolean benefitCondition = calculateBenefitDisplayCondition(event, price);
         announce.displayString(Templates.OUTPUT_BENEFIT_STATUS_MESSAGE);
-        if (noneCondition) {
+        if (benefitCondition) {
+            requestDisplayBenefitsDetails(date, price, event);
+        }
+        if (!benefitCondition) {
             String none = Templates.OUTPUT_NONE_MESSAGE.toString();
             announce.displayString(none);
         }
-        if (!noneCondition) {
-            if (event.dDay > 0) {
-                String dDayDiscount = Templates.OUTPUT_DISCOUNT_DDAY.format(event.dDay);
-                announce.displayString(dDayDiscount);
-            }
-            if (event.menu > 0) {
-                String weekDiscount = Templates.OUTPUT_DISCOUNT_WEEKDAY.format(event.menu);
-                if (date.isWeekend) {
-                    weekDiscount = Templates.OUTPUT_DISCOUNT_WEEKEND.format(event.menu);
-                }
-                announce.displayString(weekDiscount);
-            }
-            if (event.star > 0) {
-                String starDiscount = Templates.OUTPUT_DISCOUNT_STAR.format(event.star);
-                announce.displayString(starDiscount);
-            }
-            if (price.isChampagne) {
-                String present = Templates.OUTPUT_DISCOUNT_PRESENT.format(Integers.CHAMPAGNE_PRICE.getValue());
-                announce.displayString(present);
-            }
-        }
 
     }
 
-    private void displayTotalBenefit(PriceDTO price) {
-        String string = Templates.OUTPUT_TOTAL_BENEFIT_MESSAGE.format(price.benefit);
-        announce.displayString(string);
+    public void displayTotalBenefit(PriceDTO price) {
+        displayFormatString(Templates.OUTPUT_TOTAL_BENEFIT_MESSAGE, price.benefit);
     }
 
-    private void displayFinalPrice(PriceDTO price) {
+    public void displayFinalPrice(PriceDTO price) {
         String finalPrice = String.valueOf(price.price - price.discount);
-        String string = Templates.OUTPUT_PRICE_FINAL_MESSAGE.format(finalPrice);
+        displayFormatString(Templates.OUTPUT_PRICE_FINAL_MESSAGE, finalPrice);
+    }
+
+    public void displayBadge(PriceDTO price) {
+        boolean badgeCondition = !price.badge.equals("");
+        if (badgeCondition) {
+            displayFormatString(Templates.OUTPUT_BADGE_MESSAGE, price.badge);
+        }
+        if (!badgeCondition) {
+            displayFormatString(Templates.OUTPUT_BADGE_MESSAGE, Templates.OUTPUT_NONE_MESSAGE);
+        }
+    }
+
+
+    private void displayFormatString(Templates template, Object... values) {
+        String string = template.format(values);
         announce.displayString(string);
     }
 
-    private void displayBadge(PriceDTO price) {
-        String string = Templates.OUTPUT_BADGE_MESSAGE.format(price.badge);
-        announce.displayString(string);
+    private boolean calculateBenefitDisplayCondition(EventDTO event, PriceDTO price) {
+        return !(event.dDay == 0 && event.menu == 0 && event.star == 0 && !price.isChampagne);
+    }
+
+    private void requestDisplayBenefitsDetails(DateDTO date, PriceDTO price, EventDTO event) {
+        displayBenefitDetailsDDay(event);
+        displayBenefitDetailsWeekend(date, event);
+        displayBenefitDetailsStar(event);
+        displayBenefitDetailsChampagne(price);
+    }
+
+    private void displayBenefitDetailsDDay(EventDTO event) {
+        if (event.dDay > 0) {
+            displayFormatString(Templates.OUTPUT_DISCOUNT_DDAY, event.dDay);
+        }
+    }
+
+    private void displayBenefitDetailsWeekend(DateDTO date, EventDTO event) {
+        if (event.menu > 0) {
+            String weekDiscount = Templates.OUTPUT_DISCOUNT_WEEKDAY.format(event.menu);
+            if (date.isWeekend) {
+                weekDiscount = Templates.OUTPUT_DISCOUNT_WEEKEND.format(event.menu);
+            }
+            announce.displayString(weekDiscount);
+        }
+    }
+
+    private void displayBenefitDetailsStar(EventDTO event) {
+        if (event.star > 0) {
+            displayFormatString(Templates.OUTPUT_DISCOUNT_STAR, event.star);
+        }
+    }
+
+    private void displayBenefitDetailsChampagne(PriceDTO price) {
+        if (price.isChampagne) {
+            displayFormatString(Templates.OUTPUT_DISCOUNT_PRESENT, Integers.CHAMPAGNE_PRICE.getValue());
+        }
     }
 
 }

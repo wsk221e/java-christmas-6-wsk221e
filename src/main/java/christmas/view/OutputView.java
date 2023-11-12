@@ -2,7 +2,7 @@ package christmas.view;
 
 import christmas.utils.constants.Templates;
 
-public class DisplayAnnounce extends ParentView {
+public class OutputView extends ParentView {
     // Features
 
     public void displayString(String string) {

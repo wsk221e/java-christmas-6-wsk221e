@@ -13,9 +13,8 @@ public class Main {
         requestGetUserDate();
         requestGetUserMenu();
         Receipt result = doService();
-        announce.displayResult(result);
+        requestDisplayResult(result);
     }
-
 
     private void requestGetUserDate() {
         while (true) {
@@ -44,6 +43,10 @@ public class Main {
     private Receipt doService() {
         Planner planner = initializer.generatePlanner();
         return planner.getReserveInformation();
+    }
+
+    private void requestDisplayResult(Receipt result) {
+        announce.displayResult(result);
     }
 
 }
