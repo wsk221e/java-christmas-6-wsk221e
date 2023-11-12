@@ -2,19 +2,22 @@ package christmas.view;
 
 import christmas.utils.constants.Templates;
 
-public class OutputView extends ParentView {
-    // Features
+public class OutputView {
+    // Fields
+    private final ViewFunction function = new ViewFunction();
 
+
+    // Features
     public void displayString(String string) {
-        initializeCache();
-        addToCache(string);
-        print();
+        function.initializeCache();
+        function.addToCache(string);
+        function.print();
     }
 
     public void displayString(Templates string) {
-        initializeCache();
-        addToCache(string);
-        print();
+        function.initializeCache();
+        function.addToCache(string);
+        function.print();
     }
 
 }

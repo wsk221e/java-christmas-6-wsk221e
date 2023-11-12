@@ -2,12 +2,12 @@ package christmas.view;
 
 import christmas.utils.constants.Templates;
 
-class ParentView {
+class ViewFunction {
     // Fields
-    protected final StringBuilder cache = new StringBuilder();
+    private final StringBuilder cache = new StringBuilder();
 
 
-    // Subclass Implements
+    // Features
     protected void initializeCache() {
         cache.setLength(0);
     }
