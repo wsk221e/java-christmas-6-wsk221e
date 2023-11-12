@@ -7,7 +7,7 @@ import static christmas.utils.constants.Strings.DISCOUNT_WEEKDAY;
 import static christmas.utils.constants.Strings.DISCOUNT_WEEKEND;
 
 import christmas.dto.DateDTO;
-import christmas.utils.Parser;
+import christmas.utils.Utils;
 import java.util.List;
 
 public class Date {
@@ -16,7 +16,7 @@ public class Date {
     private final int date;
 
     public Date(String string) {
-        int date = Parser.parseInt(string);
+        int date = Utils.parseInt(string);
         validate(date);
         this.date = date;
     }

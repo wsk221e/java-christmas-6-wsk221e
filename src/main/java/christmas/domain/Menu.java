@@ -4,7 +4,7 @@ import static christmas.utils.validation.ValidatorMenu.validateMenu;
 
 import christmas.domain.enums.Menus;
 import christmas.dto.MenuDTO;
-import christmas.utils.Parser;
+import christmas.utils.Utils;
 
 public class Menu {
     private final String name;
@@ -12,7 +12,7 @@ public class Menu {
     private final int amount;
 
     public Menu(String name, String amountString) {
-        int amount = Parser.parseInt(amountString);
+        int amount = Utils.parseInt(amountString);
         validateMenu(name, amount);
 
         this.category = Menus.getCategoryByName(name);
