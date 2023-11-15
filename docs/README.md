@@ -176,13 +176,12 @@
 - Controller
     - Main: 메인 컨트롤러, 전체적인 흐름을 제어
     - Initializer: 전달받은 데이터로 모델 설정 및 서비스 객체 생성 후 메인에 전달(Planner)
-    - RequestController: 입력과 관련된 기능을 수행하도록 View에게 명령
+    - RequestController: 사용자 입력과 관련된 기능을 수행하도록 View에게 명령
     - AnnounceController: 출력과 관련된 기능을 수행하도록 View에게 명령
 - view
-    - ParentView: View에서 사용되는 공통 메서드 제공
-    - InputView: 사용자의 입력을 받기 위한 View
-    - DisplayError: 사용자에게 출력되는 메시지 중 에러에 관한 내용 담당
-    - DisplayAnnounce: 사용자에게 출력되는 메시지 중 전달사항(알림)에 관한 내용 담당
+    - ViewFunction: View에서 사용되는 공통 메서드 제공
+    - InputView: 사용자의 입력을 받는 기능 담당
+    - OutputView: 사용자에게 출력되는 메시지 담당(안내사항, 에러메시지)
 - utils
     - constants
         - Templates: 각종 출력에 사용되는 문자열 템플릿, 포매팅 기능 제공
@@ -191,3 +190,4 @@
     - validation
         - ValidatorMenu: 메뉴 유효성 검사 기능의 크기 때문에 따로 분리
     - Parser: 문자열을 정수로 변환하는 기능 제공
+- Application: Main 컨트롤러 실행(프로그램 실행)
