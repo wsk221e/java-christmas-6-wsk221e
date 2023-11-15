@@ -35,28 +35,22 @@ public class AnnounceController {
 
 
     // Internal Implements
-    // 템플릿 문자열을 출력한다.
-    private void displayFormatString(Templates template, Object... values) {
-        String string = template.format(values);
-        announce.displayString(string);
-    }
-
     // 인사말과 날짜를 출력한다.
     private void displayGreetings(DateDTO date) {
-        displayFormatString(Templates.OUTPUT_GREETINGS_MESSAGE, date.date);
+        announce.displayFormatString(Templates.OUTPUT_GREETINGS_MESSAGE, date.date);
     }
 
     // 메뉴를 출력한다.
     private void displayMenu(List<MenuDTO> menus) {
         announce.displayString(Templates.OUTPUT_MENU_MESSAGE);
         for (MenuDTO menu : menus) {
-            displayFormatString(Templates.OUTPUT_INNER_FORMAT_MENU, menu.name, menu.amount);
+            announce.displayFormatString(Templates.OUTPUT_INNER_FORMAT_MENU, menu.name, menu.amount);
         }
     }
 
     // 총 금액을 출력한다.
     private void displayTotalPrice(PriceDTO price) {
-        displayFormatString(Templates.OUTPUT_PRICE_TOTAL_MESSAGE, price.price);
+        announce.displayFormatString(Templates.OUTPUT_PRICE_TOTAL_MESSAGE, price.price);
     }
 
     // 조건에 따라 증정품을 출력한다.
@@ -100,7 +94,7 @@ public class AnnounceController {
     // D-Day 할인 내역을 출력한다.
     private void displayBenefitDetailsDDay(EventDTO event) {
         if (event.dDay > 0) {
-            displayFormatString(Templates.OUTPUT_DISCOUNT_DDAY, event.dDay);
+            announce.displayFormatString(Templates.OUTPUT_DISCOUNT_DDAY, event.dDay);
         }
     }
 
@@ -118,36 +112,36 @@ public class AnnounceController {
     // 별표 할인 내역을 출력한다.
     private void displayBenefitDetailsStar(EventDTO event) {
         if (event.star > 0) {
-            displayFormatString(Templates.OUTPUT_DISCOUNT_STAR, event.star);
+            announce.displayFormatString(Templates.OUTPUT_DISCOUNT_STAR, event.star);
         }
     }
 
     // 샴페인 증정 내역을 출력한다.
     private void displayBenefitDetailsChampagne(PriceDTO price) {
         if (price.isChampagne) {
-            displayFormatString(Templates.OUTPUT_DISCOUNT_PRESENT, Integers.CHAMPAGNE_PRICE.getValue());
+            announce.displayFormatString(Templates.OUTPUT_DISCOUNT_PRESENT, Integers.CHAMPAGNE_PRICE.getValue());
         }
     }
 
     // 총 혜택 금액을 출력한다.
     private void displayTotalBenefit(PriceDTO price) {
-        displayFormatString(Templates.OUTPUT_TOTAL_BENEFIT_MESSAGE, price.benefit);
+        announce.displayFormatString(Templates.OUTPUT_TOTAL_BENEFIT_MESSAGE, price.benefit);
     }
 
     // 할인이 적용된 최종 금액을 출력한다.
     private void displayFinalPrice(PriceDTO price) {
         String finalPrice = String.valueOf(price.price - price.discount);
-        displayFormatString(Templates.OUTPUT_PRICE_FINAL_MESSAGE, finalPrice);
+        announce.displayFormatString(Templates.OUTPUT_PRICE_FINAL_MESSAGE, finalPrice);
     }
 
     // 뱃지를 출력한다.
     private void displayBadge(PriceDTO price) {
         boolean badgeCondition = !price.badge.equals("");
         if (badgeCondition) {
-            displayFormatString(Templates.OUTPUT_BADGE_MESSAGE, price.badge);
+            announce.displayFormatString(Templates.OUTPUT_BADGE_MESSAGE, price.badge);
         }
         if (!badgeCondition) {
-            displayFormatString(Templates.OUTPUT_BADGE_MESSAGE, Templates.OUTPUT_NONE_MESSAGE);
+            announce.displayFormatString(Templates.OUTPUT_BADGE_MESSAGE, Templates.OUTPUT_NONE_MESSAGE);
         }
     }
 

@@ -8,6 +8,11 @@ public class OutputView {
 
 
     // Features
+    public void displayFormatString(Templates template, Object... values) {
+        String string = template.format(values);
+        displayString(string);
+    }
+
     public void displayString(String string) {
         function.initializeCache();
         function.addToCache(string);
