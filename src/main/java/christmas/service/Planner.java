@@ -24,8 +24,9 @@ public class Planner {
         return getOrderDetails();
     }
 
-    
+
     // Internal Implements
+    // 메뉴 목록을 DTO 형태로 반환한다.
     private Receipt getOrderDetails() {
         DateDTO date = dateManager.getDate();
         List<MenuDTO> menus = menuManager.getMenus();

@@ -28,11 +28,13 @@ public class Price {
 
 
     // Internal Implements
+    // 총 할인 금액을 계산한다.
     private int calculateTotalDiscount() {
         int discount = event.getTotalBenefit();
         return discount;
     }
 
+    // 총 혜택 금액을 계산한다.
     private int calculateTotalBenefit() {
         int benefit = discount;
         if (isChampagne) {
@@ -41,6 +43,7 @@ public class Price {
         return benefit;
     }
 
+    // 혜택 금액에 따른 뱃지를 반환한다.
     private String getBadge(int discount) {
         if (isChampagne) {
             discount += Integers.CHAMPAGNE_PRICE.getValue();

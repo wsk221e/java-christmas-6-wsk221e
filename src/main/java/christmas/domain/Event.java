@@ -39,6 +39,7 @@ public class Event {
 
 
     // Internal Implements
+    // 총 메뉴 할인 금액을 계산한다.(=요일 할인)
     private int calculateMenuDistount(DateDTO date, List<MenuDTO> menus) {
         int discount = 0;
         for (MenuDTO menu : menus) {
@@ -50,6 +51,7 @@ public class Event {
         return discount;
     }
 
+    // D-Day 할인 금액을 계산한다.
     private int calculateDDayDiscount(DateDTO date) {
         int discount = 0;
         int dDay = date.dDay;
@@ -59,6 +61,7 @@ public class Event {
         return discount;
     }
 
+    // 별표 할인 금액을 계산한다.
     private int calculateStarDiscount(DateDTO date) {
         int discount = 0;
         if (date.isStared) {

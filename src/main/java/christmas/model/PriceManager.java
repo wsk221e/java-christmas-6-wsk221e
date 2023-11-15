@@ -24,6 +24,7 @@ public class PriceManager {
 
 
     // Internal Implements
+    // 총 가격을 계산한다.
     private int calculateTotalPrice(List<MenuDTO> menus) {
         int sum = 0;
         for (MenuDTO menu : menus) {

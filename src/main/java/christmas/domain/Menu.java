@@ -30,6 +30,7 @@ public class Menu {
 
 
     // Internal Implements
+    // Menus로부터 메뉴 이름으로 가격을 반환한다.
     private int getPrice() {
         return Menus.getPriceByName(name);
     }

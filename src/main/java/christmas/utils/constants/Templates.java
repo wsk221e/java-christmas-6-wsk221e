@@ -39,6 +39,7 @@ public enum Templates {
         return message.replace("\n", System.lineSeparator());
     }
 
+    // 문자열을 포맷팅고, 정수는 천 단위마다 콤마를 찍는다.
     public String format(Object... args) {
         Object[] formattedArgs = new Object[args.length];
         for (int i = 0; i < args.length; i++) {
@@ -56,6 +57,7 @@ public enum Templates {
 
 
     // Internal Implements
+    // 문자열을 정수로 변환하고, 정수가 아니면 그대로 반환한다.
     private Object tryParseInt(Object arg) {
         String string = arg.toString();
         try {

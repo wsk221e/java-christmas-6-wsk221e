@@ -44,6 +44,7 @@ public class Validator {
 
 
     // Internal Implements
+    // 메뉴 각각의 이름을 검증한다.
     private static void validateMenuName(String name) {
         try {
             Menus.valueOf(name);
@@ -52,13 +53,14 @@ public class Validator {
         }
     }
 
+    // 메뉴 각각의 수량을 검증한다.
     private static void validateMenuAmount(int amount) {
         if (amount < AMOUNT_RANGE_MIN || amount > AMOUNT_RANGE_MAX) {
             throw new IllegalArgumentException();
         }
     }
 
-
+    // 메뉴 목록의 총 수량을 검증한다.
     private static void validateMenusTotalAmount(List<MenuDTO> menus) {
         int total = 0;
         for (MenuDTO menu : menus) {
@@ -69,6 +71,7 @@ public class Validator {
         }
     }
 
+    // 메뉴 목록의 중복을 검증한다.
     private static void validateMenusDuplicated(List<MenuDTO> menus) {
         Set<String> isDuplicated = new HashSet<>();
         for (MenuDTO menu : menus) {
@@ -79,6 +82,7 @@ public class Validator {
         }
     }
 
+    // 메뉴 목록에 음료만 있는지 검증한다.
     private static void validateMenusOnlyDrinks(List<MenuDTO> menus) {
         int total = 0;
         int forbidden = 0;

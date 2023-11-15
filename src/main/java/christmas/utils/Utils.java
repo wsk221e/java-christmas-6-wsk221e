@@ -26,6 +26,7 @@ public class Utils {
         return date;
     }
 
+    // (메뉴-수량, 메뉴-수량, ...) 형식의 메뉴를 조건에 맞게 분리한다.
     public static List<Menu> parseMenus(String string) {
         List<Menu> menus = new ArrayList<>();
 
